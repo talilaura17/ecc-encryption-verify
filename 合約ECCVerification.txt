@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ECCVerification {
+    struct G1Point {
+        uint X;
+        uint Y;
+    }
+
+    // 使用內聯Assembly來調用預言機進行橢圓曲線點加法
+    /// return the sum of two points of G1
+    function add(G1Point memory p1, G1Point memory p2) internal returns (G1Point memory result) {
+        uint[4] memory input;
+        input[0] = p1.X;
+        input[1] = p1.Y;
+        input[2] = p2.X;
+        input[3] = p2.Y;
+        bool success;
+        assembly {
+            success := call(sub(gas(), 2000), 6, 0, input, 0xc0, result, 0x60)
+            // Use "invalid" to make gas estimation work
+            switch success case 0 { invalid() }
+        }
+        require(success);
+    }
+
+    // 驗證 C = M + B
+    function verify(G1Point memory M, G1Point memory B, G1Point memory C) public returns (bool) {
+        // 計算 M + B
+        G1Point memory MplusB = add(M, B);
+
+        // 驗證 C 是否等於 M + B
+        return (C.X == MplusB.X && C.Y == MplusB.Y);
+    }
+}
