@@ -1,0 +1,67 @@
+[
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "X",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Y",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ECCVerification.G1Point",
+				"name": "M",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "X",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Y",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ECCVerification.G1Point",
+				"name": "B",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "X",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "Y",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct ECCVerification.G1Point",
+				"name": "C",
+				"type": "tuple"
+			}
+		],
+		"name": "verify",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
